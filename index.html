@@ -5,6 +5,93 @@
 <title>G.s.A.I.N. | Gogon Sirangan Awareness & Information Network</title>
 
 <style>
+
+/* LOGO */
+.logoWrap{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  margin-bottom:20px;
+  justify-content:center;
+}
+.logoIcon{
+  width:65px;height:65px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#4fc3f7,#0288d1);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:2rem;
+  color:white;
+  box-shadow:0 10px 25px rgba(0,0,0,.35);
+}
+.logoText{
+  text-align:left;
+}
+.logoText h1{
+  margin:0;
+  font-size:2.6rem;
+  color:white;
+  letter-spacing:2px;
+}
+.logoText span{
+  font-size:.9rem;
+  color:#b3e5fc;
+  letter-spacing:1px;
+}
+
+/* DESCRIPTION */
+.homeDesc{
+  max-width:700px;
+  margin:20px auto 40px auto;
+  color:#e3f2fd;
+  line-height:1.7;
+  font-size:1rem;
+  opacity:0;
+  animation:fadeUp 1s forwards;
+  animation-delay:.4s;
+}
+
+/* FEATURE CARDS */
+.featureRow{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:25px;
+  margin-top:30px;
+}
+.featureCard{
+  background:rgba(255,255,255,.15);
+  backdrop-filter:blur(12px);
+  padding:30px;
+  border-radius:22px;
+  color:white;
+  box-shadow:0 15px 40px rgba(0,0,0,.35);
+  transition:.4s;
+  position:relative;
+  overflow:hidden;
+}
+.featureCard::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,transparent,rgba(79,195,247,.35),transparent);
+  opacity:0;
+  transition:.4s;
+}
+.featureCard:hover::after{opacity:1}
+.featureCard:hover{transform:translateY(-8px) scale(1.03)}
+.featureIcon{
+  font-size:2.2rem;
+  margin-bottom:15px;
+}
+.featureCard h3{margin:10px 0}
+.featureCard p{font-size:.9rem;opacity:.9}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
 *{box-sizing:border-box;font-family:'Segoe UI',sans-serif}
 body{margin:0;color:#0b1d3a;background:linear-gradient(120deg,#0f2027,#203a43,#2c5364);overflow-x:hidden}
 
@@ -92,16 +179,49 @@ tr:nth-child(even){background:#e3f2fd}
 <!-- HOME -->
 <div id="home" class="page active homeIntro">
   <div class="heroBox">
-    <h1>G.s.A.I.N.</h1>
-    <h2>Gogon Sirangan Awareness & Information Network</h2>
-    <div class="iconRow">
-      <div class="iconBubble">📢</div>
-      <div class="iconBubble">📄</div>
-      <div class="iconBubble">🚨</div>
-      <div class="iconBubble">🤝</div>
+
+    <!-- LOGO -->
+    <div class="logoWrap">
+      <div class="logoIcon">🌐</div>
+      <div class="logoText">
+        <h1>G.s.A.I.N.</h1>
+        <span>Gogon Sirangan Awareness & Information Network</span>
+      </div>
     </div>
-    <div class="pulseLine"></div>
-    <div class="hint">Information • Awareness • Community</div>
+
+    <!-- SHORT DESCRIPTION -->
+    <div class="homeDesc">
+      G.s.A.I.N. is a community-focused information platform designed to improve
+      awareness, communication, and access to barangay services in Gogon Sirangan.
+      It serves as a centralized space for announcements, service guidance,
+      emergency updates, and official contacts—promoting transparency,
+      preparedness, and community engagement.
+    </div>
+
+    <!-- FEATURE CARDS -->
+    <div class="featureRow">
+      <div class="featureCard">
+        <div class="featureIcon">📢</div>
+        <h3>Awareness</h3>
+        <p>Keep residents informed through timely announcements, advisories,
+        and barangay-wide updates.</p>
+      </div>
+
+      <div class="featureCard">
+        <div class="featureIcon">📄</div>
+        <h3>Information</h3>
+        <p>Guide residents on available services, requirements, and procedures
+        without unnecessary office visits.</p>
+      </div>
+
+      <div class="featureCard">
+        <div class="featureIcon">🤝</div>
+        <h3>Community</h3>
+        <p>Strengthen communication between officials and residents through
+        accessible contacts and emergency hotlines.</p>
+      </div>
+    </div>
+
   </div>
 </div>
 
