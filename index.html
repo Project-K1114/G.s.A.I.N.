@@ -3,477 +3,278 @@
 <head>
 <meta charset="UTF-8">
 <title>G.s.A.I.N. | Gogon Sirangan Awareness & Information Network</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-  /* HEADER */
-.siteHeader{
-  display:flex;
-  align-items:center;
-  gap:18px;
-  justify-content:center;
-  margin-bottom:25px;
+/* ===== GLOBAL STYLES ===== */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #0a2a66, #0f4c81);
+  color: #fff;
 }
 
-.siteHeader img{
-  width:75px;
-  height:75px;
-  object-fit:contain;
-  border-radius:50%;
-  background:white;
-  padding:6px;
-  box-shadow:0 8px 20px rgba(0,0,0,.4);
+header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 30px;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(6px);
 }
 
-.siteTitle{
-  text-align:left;
+header img {
+  height: 55px;
 }
 
-.siteTitle h1{
-  margin:0;
-  font-size:2.4rem;
-  color:white;
-  letter-spacing:2px;
+header h1 {
+  font-size: 1.4rem;
+  margin: 0;
 }
 
-.siteTitle span{
-  font-size:.85rem;
-  color:#b3e5fc;
-  letter-spacing:1px;
+nav {
+  margin-left: auto;
 }
 
-
-/* LOGO */
-.logoWrap{
-  display:flex;
-  align-items:center;
-  gap:15px;
-  margin-bottom:20px;
-  justify-content:center;
-}
-.logoIcon{
-  width:65px;height:65px;
-  border-radius:18px;
-  background:linear-gradient(135deg,#4fc3f7,#0288d1);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:2rem;
-  color:white;
-  box-shadow:0 10px 25px rgba(0,0,0,.35);
-}
-.logoText{
-  text-align:left;
-}
-.logoText h1{
-  margin:0;
-  font-size:2.6rem;
-  color:white;
-  letter-spacing:2px;
-}
-.logoText span{
-  font-size:.9rem;
-  color:#b3e5fc;
-  letter-spacing:1px;
+nav a {
+  color: #fff;
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: 500;
 }
 
-/* DESCRIPTION */
-.homeDesc{
-  max-width:700px;
-  margin:20px auto 40px auto;
-  color:#e3f2fd;
-  line-height:1.7;
-  font-size:1rem;
-  opacity:0;
-  animation:fadeUp 1s forwards;
-  animation-delay:.4s;
+nav a:hover {
+  text-decoration: underline;
 }
 
-/* FEATURE CARDS */
-.featureRow{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:25px;
-  margin-top:30px;
-}
-.featureCard{
-  background:rgba(255,255,255,.15);
-  backdrop-filter:blur(12px);
-  padding:30px;
-  border-radius:22px;
-  color:white;
-  box-shadow:0 15px 40px rgba(0,0,0,.35);
-  transition:.4s;
-  position:relative;
-  overflow:hidden;
-}
-.featureCard::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(120deg,transparent,rgba(79,195,247,.35),transparent);
-  opacity:0;
-  transition:.4s;
-}
-.featureCard:hover::after{opacity:1}
-.featureCard:hover{transform:translateY(-8px) scale(1.03)}
-.featureIcon{
-  font-size:2.2rem;
-  margin-bottom:15px;
-}
-.featureCard h3{margin:10px 0}
-.featureCard p{font-size:.9rem;opacity:.9}
-
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(20px)}
-  to{opacity:1;transform:translateY(0)}
+/* ===== HOME HERO ===== */
+.hero {
+  height: 85vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
 }
 
-*{box-sizing:border-box;font-family:'Segoe UI',sans-serif}
-body{margin:0;color:#0b1d3a;background:linear-gradient(120deg,#0f2027,#203a43,#2c5364);overflow-x:hidden}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(0,255,255,0.15), transparent 40%),
+    radial-gradient(circle at 80% 60%, rgba(0,150,255,0.15), transparent 40%);
+  animation: floatBg 12s infinite alternate;
+}
 
-/* BACKGROUND */
-canvas{position:fixed;top:0;left:0;z-index:-1}
+@keyframes floatBg {
+  from { transform: scale(1); }
+  to { transform: scale(1.15); }
+}
 
-/* NAV */
-nav{display:flex;justify-content:space-around;background:rgba(0,0,0,.6);padding:15px;position:sticky;top:0;z-index:10}
-nav button{background:none;border:none;color:white;font-size:1rem;cursor:pointer;padding:8px 15px;border-radius:10px;position:relative;overflow:hidden}
-nav button::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent,rgba(79,195,247,.6),transparent);opacity:0;transition:.3s}
-nav button:hover::after{opacity:1}
+.hero-content {
+  position: relative;
+  text-align: center;
+  max-width: 700px;
+}
 
-/* PAGES */
-.page{display:none;padding:40px;animation:fade .5s}
-.page.active{display:block}
-@keyframes fade{from{opacity:0}to{opacity:1}}
+.hero-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
 
-/* HOME INTRO */
-.homeIntro{display:flex;justify-content:center;align-items:center;height:80vh}
-.heroBox{background:rgba(255,255,255,.12);backdrop-filter:blur(15px);border-radius:30px;padding:50px 70px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.4);animation:floatUp 1.2s}
-.heroBox h1{color:white;font-size:2.7rem;margin-bottom:10px}
-.heroBox h2{color:#4fc3f7;font-size:1.2rem;margin-bottom:30px}
-.iconRow{display:flex;gap:25px;justify-content:center;margin:30px 0}
-.iconBubble{width:65px;height:65px;border-radius:50%;background:rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center;font-size:1.7rem;animation:float 3s infinite}
-.iconBubble:hover{transform:scale(1.15);background:#4fc3f7}
-.iconBubble:nth-child(2){animation-delay:.3s}
-.iconBubble:nth-child(3){animation-delay:.6s}
-.iconBubble:nth-child(4){animation-delay:.9s}
-.pulseLine{width:200px;height:4px;background:linear-gradient(90deg,#4fc3f7,#0288d1);margin:20px auto;border-radius:5px;animation:pulse 2s infinite}
-.hint{color:#e3f2fd;letter-spacing:3px;font-size:.85rem}
+.hero-content p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
 
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-@keyframes pulse{0%{opacity:.4}50%{opacity:1}100%{opacity:.4}}
-@keyframes floatUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+/* ===== SECTIONS ===== */
+section {
+  padding: 60px 40px;
+}
 
-/* CARDS */
-.card{background:rgba(255,255,255,.95);border-radius:20px;padding:25px;margin-bottom:20px;box-shadow:0 10px 30px rgba(0,0,0,.2)}
-.card h3{color:#0288d1}
+section h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
 
-/* POSTS */
-.post{background:#e3f2fd;padding:20px;border-left:6px solid #0288d1;border-radius:12px;margin-bottom:15px}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
 
-/* SERVICES */
-.serviceGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
-.serviceCard{background:white;padding:25px;border-radius:20px;text-align:center;cursor:pointer;transition:.3s}
-.serviceCard:hover{background:#4fc3f7;transform:translateY(-5px)}
+.card {
+  background: rgba(255,255,255,0.1);
+  border-radius: 14px;
+  padding: 20px;
+  backdrop-filter: blur(8px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-/* TRANSITION */
-#pageTransition{position:fixed;inset:0;background:linear-gradient(135deg,#0288d1,#01579b);z-index:999;transform:scaleX(0);transform-origin:left;transition:.5s}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
 
-/* BADGE */
-.adminBadge{position:fixed;bottom:15px;right:15px;background:rgba(255,255,255,.85);padding:8px 15px;border-radius:20px;font-size:.75rem;color:#01579b;box-shadow:0 5px 15px rgba(0,0,0,.3)}
+.card h3 {
+  margin-top: 0;
+}
 
-/* FOOTER */
-footer{text-align:center;padding:20px;background:rgba(0,0,0,.6);color:white}
+/* ===== ADMIN PANEL ===== */
+.admin {
+  background: rgba(0,0,0,0.4);
+  border-radius: 14px;
+  padding: 25px;
+  max-width: 600px;
+  margin: auto;
+}
 
-/* ADMIN PANEL */
-.adminPanel{background:rgba(255,255,255,.95);border-radius:15px;padding:20px;margin-bottom:20px;box-shadow:0 10px 20px rgba(0,0,0,.2)}
-.adminPanel input, .adminPanel textarea, .adminPanel select{width:100%;margin:5px 0 15px 0;padding:8px;border-radius:8px;border:1px solid #ccc}
-.adminPanel button{padding:10px 15px;border:none;border-radius:10px;background:#0288d1;color:white;cursor:pointer;margin-right:10px}
-.adminPanel button:hover{background:#4fc3f7}
+.admin-note {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  margin-top: 15px;
+}
 
-/* TABLES */
-table{width:100%;border-collapse:collapse;margin-top:15px}
-table th, table td{border:1px solid #ccc;padding:10px;text-align:left}
-table th{background:#0288d1;color:white;border-radius:5px}
-tr:nth-child(even){background:#e3f2fd}
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: rgba(0,0,0,0.3);
+  font-size: 0.85rem;
+}
 </style>
 </head>
+
 <body>
 
-<canvas id="bg"></canvas>
-<div id="pageTransition"></div>
-<div class="adminBadge">Admin Preview</div>
+<header>
+  <!-- Replace src with barangay logo file -->
+  <img src="barangay-logo.png" alt="Barangay Logo">
+  <h1>G.s.A.I.N.</h1>
 
-<nav>
-  <button onclick="openPage('home')">Home</button>
-  <button onclick="openPage('announcements')">Announcements</button>
-  <button onclick="openPage('services')">Service Guide</button>
-  <button onclick="openPage('emergency')">Emergency</button>
-  <button onclick="openPage('contacts')">Contacts</button>
-  <button onclick="checkAdmin()">Admin Panel</button>
-</nav>
+  <nav>
+    <a href="#hotlines">Hotlines</a>
+    <a href="#contacts">Contacts</a>
+    <a href="#admin">Admin</a>
+  </nav>
+</header>
 
-<!-- HOME -->
-<div id="home" class="page active homeIntro">
-  <div class="heroBox">
-    
-    <!-- WEBSITE HEADER WITH BARANGAY LOGO -->
-<div class="siteHeader">
-  <img src="gogon-sirangan-logo.png" alt="Barangay Gogon Sirangan Logo">
-  <div class="siteTitle">
-    <h1>G.s.A.I.N.</h1>
-    <span>Gogon Sirangan Awareness & Information Network</span>
+<!-- ===== HOME ===== -->
+<div class="hero">
+  <div class="hero-content">
+    <h2>Gogon Sirangan Awareness & Information Network</h2>
+    <p>
+      A centralized digital platform designed to improve community awareness,
+      access to essential services, and emergency readiness for Barangay Gogon Sirangan.
+    </p>
   </div>
 </div>
-    
-    <!-- Tagline -->
-    <div style="color:#e3f2fd;font-size:.85rem;letter-spacing:2px;margin-bottom:15px">
-  Official Barangay Information System
-</div>
 
-    <!-- SHORT DESCRIPTION -->
-    <div class="homeDesc">
-      G.s.A.I.N. is a community-focused information platform designed to improve
-      awareness, communication, and access to barangay services in Gogon Sirangan.
-      It serves as a centralized space for announcements, service guidance,
-      emergency updates, and official contacts—promoting transparency,
-      preparedness, and community engagement.
+<!-- ===== EMERGENCY HOTLINES ===== -->
+<section id="hotlines">
+  <h2>🚨 Emergency Hotlines</h2>
+  <div class="grid" id="hotlineList"></div>
+</section>
+
+<!-- ===== CONTACTS ===== -->
+<section id="contacts">
+  <h2>📞 Barangay Contacts</h2>
+  <div class="grid" id="contactList"></div>
+</section>
+
+<!-- ===== ADMIN PANEL ===== -->
+<section id="admin">
+  <h2>🔐 Admin Panel</h2>
+  <div class="admin">
+    <p>
+      This admin panel serves as a guide for authorized personnel.
+      To permanently update information, edit the JavaScript arrays
+      inside the website code.
+    </p>
+
+    <div class="admin-note">
+      ⚠️ Public users cannot modify official data to ensure accuracy
+      and information security.
     </div>
-
-    <!-- FEATURE CARDS -->
-    <div class="featureRow">
-      <div class="featureCard">
-        <div class="featureIcon">📢</div>
-        <h3>Awareness</h3>
-        <p>Keep residents informed through timely announcements, advisories,
-        and barangay-wide updates.</p>
-      </div>
-
-      <div class="featureCard">
-        <div class="featureIcon">📄</div>
-        <h3>Information</h3>
-        <p>Guide residents on available services, requirements, and procedures
-        without unnecessary office visits.</p>
-      </div>
-
-      <div class="featureCard">
-        <div class="featureIcon">🤝</div>
-        <h3>Community</h3>
-        <p>Strengthen communication between officials and residents through
-        accessible contacts and emergency hotlines.</p>
-      </div>
-    </div>
-
   </div>
-</div>
-
-<!-- ANNOUNCEMENTS -->
-<div id="announcements" class="page">
-  <h1>Announcements</h1>
-  <div id="announcementList"></div>
-</div>
-
-<!-- SERVICES -->
-<div id="services" class="page">
-  <h1>Service Guide</h1>
-  <div class="serviceGrid" id="serviceList"></div>
-  <div id="serviceDetails" class="card" style="display:none"></div>
-</div>
-
-<!-- EMERGENCY -->
-<div id="emergency" class="page">
-  <h1>Emergency Hotlines</h1>
-  <table id="hotlineTable">
-    <tr><th>Name</th><th>Contact Number</th></tr>
-  </table>
-</div>
-
-<!-- CONTACTS -->
-<div id="contacts" class="page">
-  <h1>Contacts</h1>
-  <table id="contactTable">
-    <tr><th>Name/Position</th><th>Contact Number</th></tr>
-  </table>
-</div>
-
-<!-- ADMIN PANEL -->
-<div id="admin" class="page">
-  <h1>Admin Panel</h1>
-  <div class="adminPanel">
-    <h3>Add Announcement</h3>
-    <input id="annTitle" placeholder="Title">
-    <textarea id="annContent" placeholder="Content"></textarea>
-    <button onclick="addAnnouncement()">Add</button>
-  </div>
-
-  <div class="adminPanel">
-    <h3>Add Service</h3>
-    <input id="serviceName" placeholder="Service Name">
-    <textarea id="serviceFile" placeholder="Required File/Example: Certificate of Residency"></textarea>
-    <button onclick="addService()">Add Service</button>
-  </div>
-
-  <div class="adminPanel">
-    <h3>Add Emergency Hotline</h3>
-    <input id="hotlineName" placeholder="Name">
-    <input id="hotlineNumber" placeholder="Contact Number">
-    <button onclick="addHotline()">Add Hotline</button>
-  </div>
-
-  <div class="adminPanel">
-    <h3>Add Contact</h3>
-    <input id="contactName" placeholder="Name/Position">
-    <input id="contactNumber" placeholder="Contact Number">
-    <button onclick="addContact()">Add Contact</button>
-  </div>
-</div>
+</section>
 
 <footer>
-  G.s.A.I.N. © 2026 | Gogon Sirangan Awareness & Information Network
+  © 2026 G.s.A.I.N. | Barangay Gogon Sirangan
 </footer>
 
-<audio id="clickSound">
-  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_7c4a0b1c6c.mp3">
-</audio>
-
 <script>
+/* ===== DATA STORED IN CODE (BACKUP PLAN) ===== */
 
-let isAdmin=false;
-function checkAdmin(){
-  const pass=prompt("Enter admin password:");
-  if(pass==="GsAIN2026"){ // your secret password
-    isAdmin=true;
-    openPage('admin');
-  } else {
-    alert("Wrong password!");
+const emergencyHotlines = [
+  {
+    service: "Barangay Emergency Response",
+    number: "09XXXXXXXXX",
+    description: "Immediate barangay assistance"
+  },
+  {
+    service: "PNP",
+    number: "911",
+    description: "Police emergency hotline"
+  },
+  {
+    service: "BFP",
+    number: "911",
+    description: "Fire emergency hotline"
+  },
+  {
+    service: "Rural Health Unit",
+    number: "09XXXXXXXXX",
+    description: "Medical emergencies and health concerns"
   }
-}
+];
 
-// Click sound
-const clickSound = document.getElementById("clickSound");
-clickSound.volume = 0.15;
+const contacts = [
+  {
+    name: "Barangay Captain",
+    role: "Barangay Head",
+    number: "09XXXXXXXXX"
+  },
+  {
+    name: "Barangay Secretary",
+    role: "Records and Documentation",
+    number: "09XXXXXXXXX"
+  },
+  {
+    name: "Barangay Kagawad",
+    role: "Public Safety",
+    number: "09XXXXXXXXX"
+  }
+];
 
-// Page switch
-function openPage(page){
-  const t = document.getElementById("pageTransition");
-  t.style.transform="scaleX(1)";
-  setTimeout(()=>{
-    document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-    document.getElementById(page).classList.add("active");
-    t.style.transform="scaleX(0)";
-    clickSound.play();
-  },300);
-}
+/* ===== RENDER FUNCTIONS ===== */
 
-// Background animation
-const c=document.getElementById("bg"),ctx=c.getContext("2d");
-c.width=innerWidth;c.height=innerHeight;
-let dots=Array.from({length:60},()=>({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*3+1,dx:Math.random()*.4,dy:Math.random()*.4}));
-function animate(){
-  ctx.clearRect(0,0,c.width,c.height);
-  ctx.fillStyle="rgba(79,195,247,.7)";
-  dots.forEach(d=>{ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);ctx.fill();d.x+=d.dx;d.y+=d.dy;if(d.x>c.width||d.y>c.height){d.x=0;d.y=0}});
-  requestAnimationFrame(animate);
-}
-animate();
+const hotlineList = document.getElementById("hotlineList");
+emergencyHotlines.forEach(h => {
+  const div = document.createElement("div");
+  div.className = "card";
+  div.innerHTML = `
+    <h3>${h.service}</h3>
+    <p>${h.description}</p>
+    <strong>${h.number}</strong>
+  `;
+  hotlineList.appendChild(div);
+});
 
-// DATA ARRAYS
-let announcements=[], services=[], hotlines=[], contacts=[];
-
-// FUNCTIONS
-function addAnnouncement(){
-  const title=document.getElementById("annTitle").value;
-  const content=document.getElementById("annContent").value;
-  if(!title||!content)return alert("Fill all fields");
-  announcements.push({title,content});
-  document.getElementById("annTitle").value="";
-  document.getElementById("annContent").value="";
-  renderAnnouncements();
-}
-
-function renderAnnouncements(){
-  const list=document.getElementById("announcementList");
-  list.innerHTML="";
-  announcements.forEach((a,i)=>{
-    const div=document.createElement("div");
-    div.className="post";
-    div.innerHTML=`<h3>${a.title}</h3><p>${a.content}</p><button onclick="deleteAnnouncement(${i})">Delete</button>`;
-    list.appendChild(div);
-  });
-}
-function deleteAnnouncement(i){announcements.splice(i,1);renderAnnouncements();}
-
-function addService(){
-  const name=document.getElementById("serviceName").value;
-  const file=document.getElementById("serviceFile").value;
-  if(!name||!file)return alert("Fill all fields");
-  services.push({name,file});
-  document.getElementById("serviceName").value="";
-  document.getElementById("serviceFile").value="";
-  renderServices();
-}
-
-function renderServices(){
-  const list=document.getElementById("serviceList");
-  list.innerHTML="";
-  services.forEach((s,i)=>{
-    const div=document.createElement("div");
-    div.className="serviceCard";
-    div.innerHTML=`<h3>${s.name}</h3>`;
-    div.onclick=()=>{showServiceDetails(i)};
-    list.appendChild(div);
-  });
-}
-
-function showServiceDetails(i){
-  const div=document.getElementById("serviceDetails");
-  const s=services[i];
-  div.style.display="block";
-  div.innerHTML=`<h3>${s.name}</h3><p><b>Required File:</b> ${s.file}</p><p><b>Do's:</b> Update as needed</p>`;
-}
-
-function addHotline(){
-  const name=document.getElementById("hotlineName").value;
-  const number=document.getElementById("hotlineNumber").value;
-  if(!name||!number)return alert("Fill all fields");
-  hotlines.push({name,number});
-  document.getElementById("hotlineName").value="";
-  document.getElementById("hotlineNumber").value="";
-  renderHotlines();
-}
-
-function renderHotlines(){
-  const table=document.getElementById("hotlineTable");
-  table.innerHTML="<tr><th>Name</th><th>Contact Number</th><th>Action</th></tr>";
-  hotlines.forEach((h,i)=>{
-    const row=table.insertRow();
-    row.insertCell(0).innerText=h.name;
-    row.insertCell(1).innerText=h.number;
-    const btn=document.createElement("button");btn.innerText="Delete";btn.onclick=()=>{hotlines.splice(i,1);renderHotlines()};
-    row.insertCell(2).appendChild(btn);
-  });
-}
-
-function addContact(){
-  const name=document.getElementById("contactName").value;
-  const number=document.getElementById("contactNumber").value;
-  if(!name||!number)return alert("Fill all fields");
-  contacts.push({name,number});
-  document.getElementById("contactName").value="";
-  document.getElementById("contactNumber").value="";
-  renderContacts();
-}
-
-function renderContacts(){
-  const table=document.getElementById("contactTable");
-  table.innerHTML="<tr><th>Name/Position</th><th>Contact Number</th><th>Action</th></tr>";
-  contacts.forEach((c,i)=>{
-    const row=table.insertRow();
-    row.insertCell(0).innerText=c.name;
-    row.insertCell(1).innerText=c.number;
-    const btn=document.createElement("button");btn.innerText="Delete";btn.onclick=()=>{contacts.splice(i,1);renderContacts()};
-    row.insertCell(2).appendChild(btn);
-  });
-}
+const contactList = document.getElementById("contactList");
+contacts.forEach(c => {
+  const div = document.createElement("div");
+  div.className = "card";
+  div.innerHTML = `
+    <h3>${c.name}</h3>
+    <p>${c.role}</p>
+    <strong>${c.number}</strong>
+  `;
+  contactList.appendChild(div);
+});
 </script>
+
 </body>
 </html>
+
