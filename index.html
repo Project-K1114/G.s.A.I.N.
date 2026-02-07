@@ -337,10 +337,12 @@ tr:nth-child(even){background:#e3f2fd}
 
 <script>
 
+<script>
+
 let isAdmin=false;
 function checkAdmin(){
   const pass=prompt("Enter admin password:");
-  if(pass==="GsAIN2026"){ // your secret password
+  if(pass==="GsAIN2026"){
     isAdmin=true;
     openPage('admin');
   } else {
@@ -371,20 +373,34 @@ let dots=Array.from({length:60},()=>({x:Math.random()*c.width,y:Math.random()*c.
 function animate(){
   ctx.clearRect(0,0,c.width,c.height);
   ctx.fillStyle="rgba(79,195,247,.7)";
-  dots.forEach(d=>{ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);ctx.fill();d.x+=d.dx;d.y+=d.dy;if(d.x>c.width||d.y>c.height){d.x=0;d.y=0}});
+  dots.forEach(d=>{
+    ctx.beginPath();
+    ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
+    ctx.fill();
+    d.x+=d.dx; d.y+=d.dy;
+    if(d.x>c.width||d.y>c.height){d.x=0;d.y=0;}
+  });
   requestAnimationFrame(animate);
 }
 animate();
 
-// DATA ARRAYS
-let announcements=[], services=[], hotlines=[], contacts=[];
+/* ==========================
+   LOCAL STORAGE DATA
+========================== */
+let announcements = JSON.parse(localStorage.getItem("announcements")) || [];
+let services = JSON.parse(localStorage.getItem("services")) || [];
+let hotlines = JSON.parse(localStorage.getItem("hotlines")) || [];
+let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
 
-// FUNCTIONS
+/* ==========================
+   ANNOUNCEMENTS
+========================== */
 function addAnnouncement(){
   const title=document.getElementById("annTitle").value;
   const content=document.getElementById("annContent").value;
   if(!title||!content)return alert("Fill all fields");
   announcements.push({title,content});
+  localStorage.setItem("announcements", JSON.stringify(announcements));
   document.getElementById("annTitle").value="";
   document.getElementById("annContent").value="";
   renderAnnouncements();
@@ -396,17 +412,26 @@ function renderAnnouncements(){
   announcements.forEach((a,i)=>{
     const div=document.createElement("div");
     div.className="post";
-    div.innerHTML=`<h3>${a.title}</h3><p>${a.content}</p><button onclick="deleteAnnouncement(${i})">Delete</button>`;
+    div.innerHTML=`<h3>${a.title}</h3><p>${a.content}</p>${isAdmin?`<button onclick="deleteAnnouncement(${i})">Delete</button>`:""}`;
     list.appendChild(div);
   });
 }
-function deleteAnnouncement(i){announcements.splice(i,1);renderAnnouncements();}
 
+function deleteAnnouncement(i){
+  announcements.splice(i,1);
+  localStorage.setItem("announcements", JSON.stringify(announcements));
+  renderAnnouncements();
+}
+
+/* ==========================
+   SERVICES
+========================== */
 function addService(){
   const name=document.getElementById("serviceName").value;
   const file=document.getElementById("serviceFile").value;
   if(!name||!file)return alert("Fill all fields");
   services.push({name,file});
+  localStorage.setItem("services", JSON.stringify(services));
   document.getElementById("serviceName").value="";
   document.getElementById("serviceFile").value="";
   renderServices();
@@ -419,7 +444,7 @@ function renderServices(){
     const div=document.createElement("div");
     div.className="serviceCard";
     div.innerHTML=`<h3>${s.name}</h3>`;
-    div.onclick=()=>{showServiceDetails(i)};
+    div.onclick=()=>showServiceDetails(i);
     list.appendChild(div);
   });
 }
@@ -428,14 +453,22 @@ function showServiceDetails(i){
   const div=document.getElementById("serviceDetails");
   const s=services[i];
   div.style.display="block";
-  div.innerHTML=`<h3>${s.name}</h3><p><b>Required File:</b> ${s.file}</p><p><b>Do's:</b> Update as needed</p>`;
+  div.innerHTML=`
+    <h3>${s.name}</h3>
+    <p><b>Required File:</b> ${s.file}</p>
+    <p><b>Instructions:</b> Add steps and do’s here.</p>
+  `;
 }
 
+/* ==========================
+   HOTLINES
+========================== */
 function addHotline(){
   const name=document.getElementById("hotlineName").value;
   const number=document.getElementById("hotlineNumber").value;
   if(!name||!number)return alert("Fill all fields");
   hotlines.push({name,number});
+  localStorage.setItem("hotlines", JSON.stringify(hotlines));
   document.getElementById("hotlineName").value="";
   document.getElementById("hotlineNumber").value="";
   renderHotlines();
@@ -443,21 +476,29 @@ function addHotline(){
 
 function renderHotlines(){
   const table=document.getElementById("hotlineTable");
-  table.innerHTML="<tr><th>Name</th><th>Contact Number</th><th>Action</th></tr>";
+  table.innerHTML="<tr><th>Name</th><th>Contact Number</th>"+(isAdmin?"<th>Action</th>":"")+"</tr>";
   hotlines.forEach((h,i)=>{
     const row=table.insertRow();
     row.insertCell(0).innerText=h.name;
     row.insertCell(1).innerText=h.number;
-    const btn=document.createElement("button");btn.innerText="Delete";btn.onclick=()=>{hotlines.splice(i,1);renderHotlines()};
-    row.insertCell(2).appendChild(btn);
+    if(isAdmin){
+      const btn=document.createElement("button");
+      btn.innerText="Delete";
+      btn.onclick=()=>{hotlines.splice(i,1);localStorage.setItem("hotlines",JSON.stringify(hotlines));renderHotlines()};
+      row.insertCell(2).appendChild(btn);
+    }
   });
 }
 
+/* ==========================
+   CONTACTS
+========================== */
 function addContact(){
   const name=document.getElementById("contactName").value;
   const number=document.getElementById("contactNumber").value;
   if(!name||!number)return alert("Fill all fields");
   contacts.push({name,number});
+  localStorage.setItem("contacts", JSON.stringify(contacts));
   document.getElementById("contactName").value="";
   document.getElementById("contactNumber").value="";
   renderContacts();
@@ -465,15 +506,29 @@ function addContact(){
 
 function renderContacts(){
   const table=document.getElementById("contactTable");
-  table.innerHTML="<tr><th>Name/Position</th><th>Contact Number</th><th>Action</th></tr>";
+  table.innerHTML="<tr><th>Name/Position</th><th>Contact Number</th>"+(isAdmin?"<th>Action</th>":"")+"</tr>";
   contacts.forEach((c,i)=>{
     const row=table.insertRow();
     row.insertCell(0).innerText=c.name;
     row.insertCell(1).innerText=c.number;
-    const btn=document.createElement("button");btn.innerText="Delete";btn.onclick=()=>{contacts.splice(i,1);renderContacts()};
-    row.insertCell(2).appendChild(btn);
+    if(isAdmin){
+      const btn=document.createElement("button");
+      btn.innerText="Delete";
+      btn.onclick=()=>{contacts.splice(i,1);localStorage.setItem("contacts",JSON.stringify(contacts));renderContacts()};
+      row.insertCell(2).appendChild(btn);
+    }
   });
 }
+
+/* ==========================
+   INITIAL LOAD
+========================== */
+renderAnnouncements();
+renderServices();
+renderHotlines();
+renderContacts();
+
 </script>
+
 </body>
 </html>
